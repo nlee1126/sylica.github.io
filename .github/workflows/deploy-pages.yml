@@ -19,9 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Assemble static site (root index, css, js only)
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -r css js _site/
+          cp .nojekyll _site/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: website
+          path: _site
 
   deploy:
     environment:
