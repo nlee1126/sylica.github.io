@@ -10,8 +10,7 @@
   if (!stage || !graph) return;
 
   var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var hintEl = document.querySelector("#heroDatasheetDemo .ds-demo__hint span:last-child");
-  var targetSwipe = 0;
+    var targetSwipe = 0;
   var currentSwipe = 0;
   var raf = null;
 
@@ -19,11 +18,6 @@
     var p = Math.max(0, Math.min(100, percent));
     stage.style.setProperty("--ds-swipe", p + "%");
     graph.classList.toggle("is-rich", p > 78);
-    if (hintEl) {
-      if (p > 92) hintEl.textContent = "Graph · JSON · API";
-      else if (p > 12) hintEl.textContent = "Extracting structure…";
-      else hintEl.textContent = "Swipe right to reveal the graph";
-    }
   }
 
   function tick() {
@@ -48,16 +42,15 @@
     var r = stage.getBoundingClientRect();
     if (r.width <= 0) return;
     var x = (clientX - r.left) / r.width;
-    targetSwipe = Math.max(0, Math.min(100, x * 100));
+    targetSwipe = Math.max(0, Math.min(100, x * 185 - 22));
     stage.classList.add("is-active");
     scheduleTick();
   }
 
   if (reduceMotion) {
-    currentSwipe = targetSwipe = 52;
+    currentSwipe = targetSwipe = 72;
     setSwipe(currentSwipe);
     stage.classList.add("is-active");
-    if (hintEl) hintEl.textContent = "Graph preview (reduced motion)";
     return;
   }
 

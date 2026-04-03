@@ -67,10 +67,6 @@
           aria-hidden="true"
         >
           <div class="ds-demo">
-            <div class="ds-demo__hint">
-              <span>Interactive</span>
-              <span>Swipe right to reveal the graph</span>
-            </div>
             <div class="ds-demo__stage" id="dsDemoStage">
               <div class="ds-demo__sheet" id="dsDemoSheet">
                 <div class="ds-demo__sheet-header">
@@ -140,48 +136,87 @@
                   Topology: 6—4—(3,5)—2—1 with loop 4-5-2-3-4 (per reference diagram).
                   Coordinates in viewBox units; nodes drawn on top of edges.
                 -->
-                <svg viewBox="0 0 220 118" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="ds-demo__svg">
+                <svg viewBox="0 0 1000 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="ds-demo__svg" preserveAspectRatio="none">
                   <defs>
                     <filter id="heroDsGlow" x="-30%" y="-30%" width="160%" height="160%">
-                      <feGaussianBlur stdDeviation="0.8" result="b" />
+                      <feGaussianBlur stdDeviation="1.4" result="b" />
                       <feMerge>
                         <feMergeNode in="b" />
                         <feMergeNode in="SourceGraphic" />
                       </feMerge>
                     </filter>
                   </defs>
-                  <g class="g-edges">
-                    <line class="g-edge" x1="24" y1="20" x2="54" y2="52" />
-                    <line class="g-edge" x1="54" y1="52" x2="98" y2="36" />
-                    <line class="g-edge" x1="54" y1="52" x2="54" y2="90" />
-                    <line class="g-edge" x1="98" y1="36" x2="118" y2="78" />
-                    <line class="g-edge" x1="54" y1="90" x2="118" y2="78" />
-                    <line class="g-edge" x1="118" y1="78" x2="200" y2="56" />
+
+                  <g class="g-aux">
+                    <line class="g-aux-edge" x1="84" y1="80" x2="220" y2="160" />
+                    <line class="g-aux-edge" x1="220" y1="160" x2="370" y2="110" />
+                    <line class="g-aux-edge" x1="370" y1="110" x2="540" y2="180" />
+                    <line class="g-aux-edge" x1="540" y1="180" x2="750" y2="130" />
+                    <line class="g-aux-edge" x1="240" y1="380" x2="430" y2="310" />
+                    <line class="g-aux-edge" x1="430" y1="310" x2="620" y2="370" />
+                    <line class="g-aux-edge" x1="620" y1="370" x2="820" y2="320" />
+                    <circle class="g-aux-node" cx="84" cy="80" r="4" />
+                    <circle class="g-aux-node" cx="220" cy="160" r="4" />
+                    <circle class="g-aux-node" cx="370" cy="110" r="4" />
+                    <circle class="g-aux-node" cx="540" cy="180" r="4" />
+                    <circle class="g-aux-node" cx="750" cy="130" r="4" />
+                    <circle class="g-aux-node" cx="240" cy="380" r="4" />
+                    <circle class="g-aux-node" cx="430" cy="310" r="4" />
+                    <circle class="g-aux-node" cx="620" cy="370" r="4" />
+                    <circle class="g-aux-node" cx="820" cy="320" r="4" />
                   </g>
+
+                  <g class="g-edges" filter="url(#heroDsGlow)">
+                    <line class="g-edge" x1="120" y1="120" x2="330" y2="250" />
+                    <line class="g-edge" x1="330" y1="250" x2="560" y2="190" />
+                    <line class="g-edge" x1="330" y1="250" x2="340" y2="400" />
+                    <line class="g-edge" x1="560" y1="190" x2="710" y2="330" />
+                    <line class="g-edge" x1="340" y1="400" x2="710" y2="330" />
+                    <line class="g-edge" x1="710" y1="330" x2="900" y2="220" />
+                    <line class="g-edge" x1="560" y1="190" x2="340" y2="400" />
+                    <line class="g-edge" x1="120" y1="120" x2="560" y2="190" />
+                  </g>
+
+                  <g class="g-edge-labels">
+                    <text class="g-edge__label" x="228" y="172" text-anchor="middle">THERM PATH · θJA 48°C/W</text>
+                    <text class="g-edge__label" x="446" y="210" text-anchor="middle">INPUT RAIL · VIN 2.7–5.5V</text>
+                    <text class="g-edge__label" x="350" y="330" text-anchor="start">PACKAGE COUPLING · 8L-DFN</text>
+                    <text class="g-edge__label" x="640" y="256" text-anchor="middle">REGULATION LINK · 0.02%/V typ</text>
+                    <text class="g-edge__label" x="530" y="378" text-anchor="middle">LOAD ENVELOPE · IOUT ≤ 800mA</text>
+                    <text class="g-edge__label" x="806" y="266" text-anchor="middle">OUTPUT GUARANTEE · VOUT 1.2V+</text>
+                    <text class="g-edge__label" x="448" y="286" text-anchor="middle">STABILITY LOOP · EP to GND</text>
+                  </g>
+
                   <g class="g-nodes" filter="url(#heroDsGlow)">
-                    <g class="g-node" transform="translate(24,20)">
-                      <circle class="g-node__disc" r="11" />
-                      <text class="g-node__label" y="4" text-anchor="middle">6</text>
+                    <g class="g-node" transform="translate(120,120)">
+                      <circle class="g-node__disc" r="38" />
+                      <text class="g-node__label" y="8" text-anchor="middle">6</text>
+                      <text class="g-node__meta" y="62" text-anchor="middle">THERMAL θJA</text>
                     </g>
-                    <g class="g-node" transform="translate(54,52)">
-                      <circle class="g-node__disc" r="11" />
-                      <text class="g-node__label" y="4" text-anchor="middle">4</text>
+                    <g class="g-node" transform="translate(330,250)">
+                      <circle class="g-node__disc" r="42" />
+                      <text class="g-node__label" y="9" text-anchor="middle">4</text>
+                      <text class="g-node__meta" y="68" text-anchor="middle">CORE PART NODE</text>
                     </g>
-                    <g class="g-node" transform="translate(98,36)">
-                      <circle class="g-node__disc" r="11" />
-                      <text class="g-node__label" y="4" text-anchor="middle">5</text>
+                    <g class="g-node" transform="translate(560,190)">
+                      <circle class="g-node__disc" r="40" />
+                      <text class="g-node__label" y="8" text-anchor="middle">5</text>
+                      <text class="g-node__meta" y="64" text-anchor="middle">VIN 2.7-5.5V</text>
                     </g>
-                    <g class="g-node" transform="translate(54,90)">
-                      <circle class="g-node__disc" r="11" />
-                      <text class="g-node__label" y="4" text-anchor="middle">3</text>
+                    <g class="g-node" transform="translate(340,400)">
+                      <circle class="g-node__disc" r="40" />
+                      <text class="g-node__label" y="8" text-anchor="middle">3</text>
+                      <text class="g-node__meta" y="64" text-anchor="middle">PKG 8L-DFN</text>
                     </g>
-                    <g class="g-node" transform="translate(118,78)">
-                      <circle class="g-node__disc" r="11" />
-                      <text class="g-node__label" y="4" text-anchor="middle">2</text>
+                    <g class="g-node" transform="translate(710,330)">
+                      <circle class="g-node__disc" r="42" />
+                      <text class="g-node__label" y="9" text-anchor="middle">2</text>
+                      <text class="g-node__meta" y="68" text-anchor="middle">IOUT 800mA</text>
                     </g>
-                    <g class="g-node" transform="translate(200,56)">
-                      <circle class="g-node__disc g-node__disc--accent" r="11" />
-                      <text class="g-node__label" y="4" text-anchor="middle">1</text>
+                    <g class="g-node" transform="translate(900,220)">
+                      <circle class="g-node__disc g-node__disc--accent" r="40" />
+                      <text class="g-node__label" y="8" text-anchor="middle">1</text>
+                      <text class="g-node__meta" y="64" text-anchor="middle">VOUT TARGET</text>
                     </g>
                   </g>
                 </svg>
