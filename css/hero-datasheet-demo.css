@@ -156,31 +156,37 @@
 
 .ds-demo__graph-layer .g-node__label {
   font-family: "Inter", system-ui, sans-serif;
-  font-size: 44px;
+  font-size: 26px;
   font-weight: 700;
   fill: var(--white);
   pointer-events: none;
+  paint-order: stroke;
+  stroke: rgba(10, 10, 10, 0.85);
+  stroke-width: 6px;
 }
 
 .ds-demo__graph-layer .g-node__meta {
   font-family: "Inter", system-ui, sans-serif;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   fill: rgba(250, 250, 250, 0.95);
+  paint-order: stroke;
+  stroke: rgba(10, 10, 10, 0.8);
+  stroke-width: 4px;
 }
 
 .ds-demo__graph-layer .g-edge__label {
   font-family: "Inter", system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   fill: var(--beige-wash);
   paint-order: stroke;
   stroke: rgba(10, 10, 10, 0.78);
-  stroke-width: 4px;
+  stroke-width: 3px;
   stroke-linejoin: round;
 }
 
