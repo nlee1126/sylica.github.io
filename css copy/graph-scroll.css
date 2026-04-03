@@ -1,0 +1,415 @@
+/* ===================================================
+   graph-scroll.css
+   — Background canvas
+   — Hero lead styled spans
+   — Scroll reveal animation
+   — Node sections (circular graph nodes + spine)
+   — Annotated datasheet demo
+   =================================================== */
+
+/* ── Background canvas ───────────────────────────── */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.08;
+}
+
+/* ── Hero lead ───────────────────────────────────── */
+.hero-lead__arrow {
+  color: var(--beige);
+  font-weight: 700;
+  margin: 0 0.1em;
+}
+.hero-lead__accent {
+  color: var(--beige);
+  font-weight: 600;
+}
+
+/* ── Scroll reveal ───────────────────────────────── */
+.graph-node-reveal {
+  opacity: 0;
+  transform: scale(0.85) translateY(10px);
+  transition:
+    opacity  0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.graph-node-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Sections track + spine ──────────────────────── */
+.sections-track {
+  position: relative;
+}
+
+/* Spine SVG injected by scroll-graph.js */
+.sections-track .spine-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+/* ── Node sections ───────────────────────────────── */
+.node-section {
+  position: relative;
+  z-index: 2;
+  padding-top: clamp(3rem, 7vw, 5rem);
+  padding-bottom: clamp(3rem, 7vw, 5rem);
+}
+
+/* Full-width anchor that positions the ring */
+.node-anchor {
+  position: relative;
+  width: 100%;
+  display: flex;
+  padding: 0 1.5rem;
+  margin-bottom: 2.5rem;
+  pointer-events: none;   /* don't block content below */
+}
+
+/* The circular graph node */
+.node-ring {
+  position: relative;
+  width: 220px;
+  min-width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 196, 176, 0.28);
+  background:
+    radial-gradient(circle at 38% 38%, rgba(212,196,176,0.09) 0%, transparent 65%),
+    var(--black-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.25rem;
+  pointer-events: auto;
+  box-shadow: 0 0 40px rgba(212, 196, 176, 0.06);
+  /* Position driven by CSS custom property --nx (0–1 fraction of parent width) */
+  margin-left: clamp(0px, calc(var(--nx, 0.5) * 100% - 110px), calc(100% - 220px));
+  /* Reveal: scale up from small */
+  transform-origin: center center;
+}
+
+/* Active glow on visible node */
+.node-ring.is-visible {
+  box-shadow: 0 0 60px rgba(212, 196, 176, 0.12), 0 0 0 1px rgba(212,196,176,0.18);
+}
+
+.node-ring .eyebrow {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--beige-deep);
+  margin: 0 0 0.5rem;
+}
+
+.node-ring h2 {
+  font-size: 1.05rem;
+  font-weight: 200;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0;
+  color: var(--white);
+}
+
+/* Node content — regular section content below the ring */
+.node-content {
+  position: relative;
+  z-index: 2;
+}
+
+.node-content .section-desc {
+  max-width: 38rem;
+  margin: 0 0 1.75rem;
+  color: var(--grey-light);
+  font-size: 1rem;
+}
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 768px) {
+  .node-ring {
+    width: 180px;
+    min-width: 180px;
+    height: 180px;
+    margin-left: clamp(0px, calc(var(--nx, 0.5) * 100% - 90px), calc(100% - 180px));
+  }
+  .node-ring h2 {
+    font-size: 0.9rem;
+  }
+}
+
+/* ── Annotated datasheet ─────────────────────────── */
+.anno-stage {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1.5rem;
+  align-items: start;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .anno-stage {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The mock document */
+.anno-doc {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--black-soft);
+  padding: 1.25rem 1.5rem;
+  position: relative;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.anno-doc__head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding-bottom: 0.65rem;
+  margin-bottom: 0.65rem;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.anno-doc__partnum {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--beige);
+  letter-spacing: 0.04em;
+}
+
+.anno-doc__doctitle {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0;
+}
+
+.anno-doc__rev {
+  font-size: 0.6rem;
+  color: var(--grey);
+  margin-left: auto;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.anno-doc__sect-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--beige-deep);
+  margin-bottom: 0.3rem;
+}
+
+.anno-doc__cond {
+  font-size: 0.6rem;
+  color: var(--grey);
+  margin: 0 0 0.65rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.anno-doc__table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0.25rem;
+}
+
+.anno-doc__table th {
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey);
+  padding: 0.3rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  background: var(--black);
+}
+
+.anno-doc__table td {
+  padding: 0.32rem 0.5rem;
+  color: var(--grey-light);
+  border-bottom: 1px solid rgba(42,42,42,0.5);
+}
+
+.anno-doc__table td:first-child {
+  color: var(--beige-deep);
+  font-weight: 600;
+}
+
+/* Highlighted table row */
+.anno-row-hi {
+  background: rgba(212, 196, 176, 0.06);
+}
+
+.anno-row-hi td {
+  color: var(--white) !important;
+}
+
+.anno-row-hi td:first-child {
+  color: var(--beige) !important;
+}
+
+.anno-marker-cell {
+  padding: 0 0.25rem;
+  width: 24px;
+  text-align: center;
+}
+
+/* Figure area */
+.anno-fig {
+  position: relative;
+  margin-top: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--black);
+  padding: 0.5rem;
+}
+
+.anno-chart-svg {
+  display: block;
+  width: 100%;
+}
+
+.anno-num--float {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.4rem;
+}
+
+/* Footnote */
+.anno-doc__rule {
+  border: none;
+  border-top: 1px dashed var(--border);
+  margin: 0.85rem 0 0.5rem;
+}
+
+.anno-footnote-line {
+  font-size: 0.6rem;
+  color: var(--grey);
+  margin: 0;
+  display: flex;
+  gap: 0.4rem;
+  align-items: flex-start;
+  line-height: 1.55;
+  font-family: 'Inter', sans-serif;
+}
+
+.anno-footnote-line sup {
+  color: var(--beige-deep);
+}
+
+/* Annotation number markers ①②③ */
+.anno-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 196, 176, 0.5);
+  background: rgba(212, 196, 176, 0.1);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: var(--beige);
+  flex-shrink: 0;
+  font-family: 'Inter', sans-serif;
+  line-height: 1;
+}
+
+.anno-num--fn {
+  margin-right: 0.3rem;
+}
+
+/* Callout panel */
+.anno-callouts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.anno-callout {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--elevated);
+  padding: 0.9rem 1rem;
+  transition: border-color 0.2s;
+}
+
+.anno-callout:hover {
+  border-color: rgba(212, 196, 176, 0.25);
+}
+
+.anno-callout__hd {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.anno-callout__tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey);
+  font-family: 'Inter', sans-serif;
+}
+
+.anno-callout__query {
+  display: block;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.65rem;
+  color: var(--beige-deep);
+  background: var(--black);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.35rem 0.55rem;
+  margin-bottom: 0.5rem;
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+.anno-callout__resp {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.6rem;
+  color: var(--grey-light);
+  background: var(--black);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.45rem 0.6rem;
+  margin: 0;
+  line-height: 1.55;
+  overflow-x: auto;
+}
+
+/* Annotation number color variants */
+.anno-num--a { border-color: rgba(212,196,176,0.6); color: var(--beige); }
+.anno-num--b { border-color: rgba(120,200,180,0.5); color: rgba(120,200,180,0.9); background: rgba(120,200,180,0.08); }
+.anno-num--c { border-color: rgba(180,140,220,0.5); color: rgba(180,140,220,0.9); background: rgba(180,140,220,0.08); }
+
+/* ── Reduced motion ──────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .graph-node-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  #bgCanvas { display: none; }
+}

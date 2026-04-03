@@ -11,26 +11,29 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,200..700;1,14..32,200..600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/variables.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/site.css" />
     <link rel="stylesheet" href="css/hero-datasheet-demo.css" />
+    <link rel="stylesheet" href="css/graph-scroll.css" />
   </head>
   <body>
+    <!-- Background animated graph canvas -->
+    <canvas id="bgCanvas" aria-hidden="true"></canvas>
     <div class="notice">
       <strong>Sylica</strong> — Graph-structured datasheet intelligence for hardware and agents.
     </div>
 
     <header>
       <div class="wrap nav" id="nav">
-        <a href="#" class="logo">Sylica<span>.dev</span></a>
+        <a href="#" class="logo">Sylica</a>
         <nav class="nav-links" aria-label="Primary">
           <a href="#product">Product</a>
           <a href="#use-cases">Use cases</a>
-          <a href="#how">How it works</a>
+          <a href="#live-demo">Live demo</a>
           <a href="#faq">FAQ</a>
         </nav>
         <div class="nav-actions">
@@ -48,13 +51,8 @@
         <div>
           <h1>Turn datasheets into queryable graph data.</h1>
           <p class="hero-lead">
-            Sylica builds model-ready inputs from technical datasheets. Heuristic algorithms and
-            vision models compile scattered parameters by relevant grouping factors—package variant,
-            test condition, and more. Format-specific parsers use OCR to extract key values,
-            normalized into clean JSONs. We organize JSON in a weighted graph that encodes how
-            components interact—queryable via REST API and MCP. When an agent designs with Sylica,
-            it gets the parameters and context it needs at a fraction of the token cost. Sylica is
-            the layer we need for hardware general intelligence.
+            Datasheets <span class="hero-lead__arrow">→</span> structured knowledge graphs.
+            <span class="hero-lead__accent">Queryable by AI.</span> Built for hardware intelligence.
           </p>
           <div class="hero-ctas">
             <a href="#contact" class="btn btn-primary">Request access</a>
@@ -167,133 +165,119 @@
                   </defs>
 
                   <g class="g-edges" filter="url(#heroDsGlow)">
-                    <!-- Input rail / VIN min-max into core -->
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="500" y1="200" x2="360" y2="250" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="430" y1="110" x2="500" y2="200" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="560" y1="110" x2="500" y2="200" />
+                    <!-- VIN min/max → VIN rail → core hub -->
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="490" y1="175" x2="330" y2="255" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="375" y1="75"  x2="490" y2="175" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="605" y1="75"  x2="490" y2="175" />
 
-                    <!-- Core fan-out (datasheet -> graph relationships) -->
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="360" y1="250" x2="150" y2="140" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="360" y1="250" x2="150" y2="350" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="360" y1="250" x2="300" y2="300" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="360" y1="250" x2="280" y2="410" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="360" y1="250" x2="450" y2="410" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="360" y1="250" x2="520" y2="80" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="360" y1="250" x2="580" y2="300" />
+                    <!-- Core hub fan-out -->
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="330" y1="255" x2="90"  y2="140" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="330" y1="255" x2="90"  y2="385" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="330" y1="255" x2="215" y2="320" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="330" y1="255" x2="255" y2="435" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="330" y1="255" x2="435" y2="445" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="330" y1="255" x2="760" y2="90"  />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="330" y1="255" x2="555" y2="340" />
 
-                    <!-- Core -> load/output -->
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="360" y1="250" x2="650" y2="320" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="500" y1="200" x2="840" y2="250" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="650" y1="320" x2="840" y2="250" />
+                    <!-- Core → load → output -->
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="330" y1="255" x2="695" y2="275" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="490" y1="175" x2="875" y2="225" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="695" y1="275" x2="875" y2="225" />
 
-                    <!-- Output envelopes -->
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="360" y1="250" x2="680" y2="390" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="360" y1="250" x2="900" y2="410" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="650" y1="320" x2="680" y2="390" />
-                    <line class="g-edge" marker-end="url(#dsArrow)" x1="650" y1="320" x2="900" y2="410" />
+                    <!-- Output envelope -->
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="330" y1="255" x2="700" y2="420" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="330" y1="255" x2="920" y2="420" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="695" y1="275" x2="700" y2="420" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="695" y1="275" x2="920" y2="420" />
                   </g>
 
                   <g class="g-nodes" filter="url(#heroDsGlow)">
                     <!-- 4: core hub -->
-                    <g class="g-node" transform="translate(360,250)">
+                    <g class="g-node" transform="translate(330,255)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">4</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">CORE HUB</text>
                     </g>
-
                     <!-- 5: input rail -->
-                    <g class="g-node" transform="translate(500,200)">
+                    <g class="g-node" transform="translate(490,175)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">5</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">VIN 2.7–5.5V</text>
                     </g>
-
                     <!-- 6: thermal -->
-                    <g class="g-node" transform="translate(150,140)">
+                    <g class="g-node" transform="translate(90,140)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">6</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">θJA 48°C/W</text>
                     </g>
-
                     <!-- 3: package -->
-                    <g class="g-node" transform="translate(150,350)">
+                    <g class="g-node" transform="translate(90,385)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">3</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">PKG 8L-DFN</text>
                     </g>
-
                     <!-- 10: temperature grade -->
-                    <g class="g-node" transform="translate(300,300)">
+                    <g class="g-node" transform="translate(215,320)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">10</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">TA −40..+125°C</text>
                     </g>
-
-                    <!-- 7: PSRR -->
-                    <g class="g-node" transform="translate(520,80)">
+                    <!-- 7: PSRR — moved to upper right, clear of VIN nodes -->
+                    <g class="g-node" transform="translate(760,90)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">7</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">PSRR 70dB</text>
                     </g>
-
-                    <!-- 8: noise -->
-                    <g class="g-node" transform="translate(580,300)">
+                    <!-- 8: noise — separated from IOUT -->
+                    <g class="g-node" transform="translate(555,340)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">8</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">NOISE 50nV/√Hz</text>
                     </g>
-
                     <!-- 9: line regulation -->
-                    <g class="g-node" transform="translate(280,410)">
+                    <g class="g-node" transform="translate(255,435)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">9</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">LINE 0.02–0.08%/V</text>
                     </g>
-
-                    <!-- 11: stability -->
-                    <g class="g-node" transform="translate(450,410)">
+                    <!-- 11: pin/GND -->
+                    <g class="g-node" transform="translate(435,445)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">11</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">EP → GND</text>
                     </g>
-
-                    <!-- 2: load envelope -->
-                    <g class="g-node" transform="translate(650,320)">
+                    <!-- 2: load current -->
+                    <g class="g-node" transform="translate(695,275)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">2</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">IOUT 0–800mA</text>
                     </g>
-
-                    <!-- 1: output target -->
-                    <g class="g-node" transform="translate(840,250)">
+                    <!-- 1: primary output -->
+                    <g class="g-node" transform="translate(875,225)">
                       <circle class="g-node__disc g-node__disc--accent" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">1</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">VOUT ≥1.2V</text>
                     </g>
-
                     <!-- 12: VIN min -->
-                    <g class="g-node" transform="translate(430,110)">
+                    <g class="g-node" transform="translate(375,75)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">12</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">VIN MIN 2.7V</text>
                     </g>
-
                     <!-- 13: VIN max -->
-                    <g class="g-node" transform="translate(560,110)">
+                    <g class="g-node" transform="translate(605,75)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">13</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">VIN MAX 5.5V</text>
                     </g>
-
                     <!-- 14: VOUT min -->
-                    <g class="g-node" transform="translate(680,390)">
+                    <g class="g-node" transform="translate(700,420)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">14</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">VOUT MIN 1.2V</text>
                     </g>
-
                     <!-- 15: VOUT max -->
-                    <g class="g-node" transform="translate(900,410)">
+                    <g class="g-node" transform="translate(920,420)">
                       <circle class="g-node__disc g-node__disc--accent" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">15</text>
                       <text class="g-node__meta" y="48" text-anchor="middle">VOUT MAX VIN−0.2</text>
@@ -312,33 +296,29 @@
       <div class="wrap">
         <p>Built for teams turning unstructured specs into structured, agent-ready context.</p>
         <div class="logo-row">
-          <span class="logo-pill">Semiconductor</span>
-          <span class="logo-pill">Power electronics</span>
-          <span class="logo-pill">RF &amp; mixed-signal</span>
-          <span class="logo-pill">EDA workflows</span>
-          <span class="logo-pill">AI copilots</span>
+          <span class="logo-pill">LDO Regulators</span>
+          <span class="logo-pill">Buck / Boost</span>
+          <span class="logo-pill">Op-Amps</span>
+          <span class="logo-pill">MOSFETs &amp; IGBTs</span>
+          <span class="logo-pill">RF Amplifiers</span>
         </div>
       </div>
     </section>
 
-    <section class="stat-block">
-      <div class="wrap">
-        <p class="label">Structured for scale</p>
-        <p class="num" id="statNum" data-target="2400000">0</p>
-        <p class="sub">Parameters normalized into graph-ready payloads (illustrative)</p>
-      </div>
-    </section>
+    <div class="sections-track" id="sectionsTrack">
 
-    <section class="section" id="product">
-      <div class="wrap">
-        <div class="section-head">
+    <section class="section node-section" id="product">
+      <div class="node-anchor" style="--nx:0.68">
+        <div class="node-ring graph-node-reveal">
           <p class="eyebrow">Product</p>
-          <h2>Free your parameters from the PDF.</h2>
-          <p class="section-desc">
-            A pipeline built for messy real-world datasheets: layout-aware extraction, semantic
-            grouping, and a graph that preserves relationships—not just flat fields.
-          </p>
+          <h2>Free your<br>parameters.</h2>
         </div>
+      </div>
+      <div class="wrap node-content graph-node-reveal">
+        <p class="section-desc">
+          A pipeline built for messy real-world datasheets: layout-aware extraction, semantic
+          grouping, and a graph that preserves relationships—not just flat fields.
+        </p>
         <div class="card-grid">
           <article class="card">
             <div class="card-icon">◎</div>
@@ -376,16 +356,18 @@
       </div>
     </section>
 
-    <section class="section" id="use-cases" style="background: var(--black-soft); border-block: 1px solid var(--border)">
-      <div class="wrap">
-        <div class="section-head">
+    <section class="section node-section" id="use-cases">
+      <div class="node-anchor" style="--nx:0.28">
+        <div class="node-ring graph-node-reveal">
           <p class="eyebrow">Use cases</p>
-          <h2>Where accuracy and context matter.</h2>
-          <p class="section-desc">
-            From component selection to system-level design, Sylica keeps parameters attached to the
-            conditions they were measured under.
-          </p>
+          <h2>Where it<br>matters.</h2>
         </div>
+      </div>
+      <div class="wrap node-content graph-node-reveal">
+        <p class="section-desc">
+          From component selection to system-level design, Sylica keeps parameters attached to the
+          conditions they were measured under.
+        </p>
         <div class="tabs" role="tablist" aria-label="Use cases">
           <button type="button" class="tab active" role="tab" aria-selected="true" data-panel="uc-1">
             Agentic design
@@ -431,114 +413,117 @@
       </div>
     </section>
 
-    <section class="section" id="how">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">How it works</p>
-          <h2>Built to read the way hardware teams do.</h2>
-          <p class="section-desc">
-            Multi-stage processing combines OCR, layout understanding, and graph assembly so
-            outputs stay faithful to the source document.
-          </p>
+    <section class="section node-section" id="live-demo">
+      <div class="node-anchor" style="--nx:0.44">
+        <div class="node-ring graph-node-reveal">
+          <p class="eyebrow">Live demo</p>
+          <h2>See every<br>query.</h2>
         </div>
-        <div class="steps">
-          <div class="step">
-            <div class="step-num">Step 1</div>
-            <h3>Layout &amp; capture</h3>
-            <p>
-              Vision passes segment the page—regions, tables, figures—and OCR recovers text where
-              vendors shipped scans instead of digital PDFs.
+      </div>
+      <div class="wrap node-content graph-node-reveal">
+        <p class="section-desc">One real datasheet. Three kinds of queryable information — parameter table row, performance curve, footnote condition.</p>
+
+        <!-- Annotated datasheet -->
+        <div class="anno-stage">
+          <div class="anno-doc">
+            <div class="anno-doc__head">
+              <span class="anno-doc__partnum">SX-2048L</span>
+              <span class="anno-doc__doctitle">Precision LDO Regulator</span>
+              <span class="anno-doc__rev">Rev. 3.2</span>
+            </div>
+            <div class="anno-doc__sect-label">ELECTRICAL CHARACTERISTICS</div>
+            <p class="anno-doc__cond">TA = 25°C, VIN = 5.0 V unless otherwise noted</p>
+            <table class="anno-doc__table">
+              <thead>
+                <tr><th>Sym</th><th>Parameter</th><th>Min</th><th>Typ</th><th>Max</th><th>Unit</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>VIN</td><td>Input voltage range</td><td>2.7</td><td>—</td><td>5.5</td><td>V</td></tr>
+                <tr class="anno-row-hi">
+                  <td>VOUT</td><td>Output voltage</td><td>1.2</td><td>—</td><td>VIN−0.2</td><td>V</td>
+                  <td class="anno-marker-cell"><span class="anno-num">①</span></td>
+                </tr>
+                <tr><td>IOUT</td><td>Load current</td><td>0</td><td>—</td><td>800</td><td>mA</td></tr>
+                <tr><td>PSRR</td><td>Power-supply rejection ¹</td><td>—</td><td>70</td><td>—</td><td>dB</td></tr>
+                <tr><td>Noise</td><td>Output noise density</td><td>—</td><td>50</td><td>—</td><td>nV/√Hz</td></tr>
+              </tbody>
+            </table>
+
+            <div class="anno-doc__sect-label" style="margin-top:1.25rem">EFFICIENCY vs. OUTPUT CURRENT (Fig. 1)</div>
+            <div class="anno-fig">
+              <svg viewBox="0 0 300 110" class="anno-chart-svg" aria-hidden="true">
+                <line x1="32" y1="5" x2="32" y2="90" stroke="rgba(163,163,163,0.35)" stroke-width="0.8"/>
+                <line x1="32" y1="90" x2="296" y2="90" stroke="rgba(163,163,163,0.35)" stroke-width="0.8"/>
+                <text x="26" y="12" font-size="6.5" fill="rgba(163,163,163,0.65)" text-anchor="end">95%</text>
+                <text x="26" y="90" font-size="6.5" fill="rgba(163,163,163,0.65)" text-anchor="end">60%</text>
+                <text x="32" y="101" font-size="6.5" fill="rgba(163,163,163,0.65)" text-anchor="middle">0</text>
+                <text x="164" y="101" font-size="6.5" fill="rgba(163,163,163,0.65)" text-anchor="middle">400 mA</text>
+                <text x="296" y="101" font-size="6.5" fill="rgba(163,163,163,0.65)" text-anchor="middle">800 mA</text>
+                <path d="M 32,90 C 55,90 68,28 100,10 C 138,5 195,18 296,48" fill="none" stroke="rgba(212,196,176,0.75)" stroke-width="1.8"/>
+                <circle cx="100" cy="10" r="4" fill="rgba(212,196,176,1)" />
+                <text x="108" y="8" font-size="7" fill="rgba(212,196,176,0.95)" font-weight="700">94%</text>
+                <text x="220" y="13" font-size="6" fill="rgba(163,163,163,0.55)" transform="rotate(-10 220 13)">VIN = 3.3V</text>
+              </svg>
+              <span class="anno-num anno-num--float">②</span>
+            </div>
+
+            <div class="anno-doc__rule"></div>
+            <p class="anno-footnote-line">
+              <span class="anno-num anno-num--fn">③</span>
+              <sup>1</sup> Measured at f = 1 kHz, IOUT = 100 mA, COUT = 10 μF ceramic. See eval kit schematic for test board layout.
             </p>
           </div>
-          <div class="step">
-            <div class="step-num">Step 2</div>
-            <h3>Semantic structure</h3>
-            <p>
-              Models map labels to values in context, resolve footnotes, and assign parameters to
-              the right variant or operating point.
-            </p>
+
+          <div class="anno-callouts">
+            <div class="anno-callout">
+              <div class="anno-callout__hd">
+                <span class="anno-num anno-num--a">①</span>
+                <span class="anno-callout__tag">Table parameter</span>
+              </div>
+              <code class="anno-callout__query">GET /graph/sx2048l/node/vout</code>
+              <pre class="anno-callout__resp">{
+  "id": "vout",
+  "min": 1.2, "unit": "V",
+  "edges": ["iout","theta","psrr"]
+}</pre>
+            </div>
+            <div class="anno-callout">
+              <div class="anno-callout__hd">
+                <span class="anno-num anno-num--b">②</span>
+                <span class="anno-callout__tag">Performance curve</span>
+              </div>
+              <code class="anno-callout__query">GET /graph/sx2048l/curve/eff?load=100mA</code>
+              <pre class="anno-callout__resp">{
+  "typ": 94, "unit": "%",
+  "at": { "vin": 3.3, "iout": "100mA" }
+}</pre>
+            </div>
+            <div class="anno-callout">
+              <div class="anno-callout__hd">
+                <span class="anno-num anno-num--c">③</span>
+                <span class="anno-callout__tag">Footnote condition</span>
+              </div>
+              <code class="anno-callout__query">GET /graph/sx2048l/conditions/1</code>
+              <pre class="anno-callout__resp">{
+  "freq": "1kHz",
+  "iout": "100mA",
+  "cout": "10μF ceramic"
+}</pre>
+            </div>
           </div>
-          <div class="step">
-            <div class="step-num">Step 3</div>
-            <h3>Graph &amp; API</h3>
-            <p>
-              Normalized JSON becomes nodes; interactions and dependencies become weighted edges.
-              Your stack queries subgraphs via REST or MCP.
-            </p>
-          </div>
-        </div>
+        </div><!-- /anno-stage -->
+
       </div>
     </section>
 
-    <section class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <p class="eyebrow">Platform</p>
-          <h2>All-in-one datasheet intelligence.</h2>
-          <p class="section-desc">
-            Coverage for the long tail of vendor formats—without maintaining a zoo of one-off
-            scrapers.
-          </p>
-        </div>
-        <div class="feature-grid">
-          <div class="feature">
-            <h4>Table &amp; chart robustness</h4>
-            <p>Complex tables, merged cells, and small-type footnotes—handled with layout-aware models.</p>
-          </div>
-          <div class="feature">
-            <h4>Multi-format ingest</h4>
-            <p>PDFs, scanned images, and mixed digital exports through one ingestion path.</p>
-          </div>
-          <div class="feature">
-            <h4>LLM-optimized payloads</h4>
-            <p>Subgraph queries return token-efficient context tuned for agents and RAG backends.</p>
-          </div>
-          <div class="feature">
-            <h4>Weighted relationships</h4>
-            <p>Edges encode strength and dependency so ranking and retrieval stay physically meaningful.</p>
-          </div>
-          <div class="feature">
-            <h4>REST &amp; MCP</h4>
-            <p>First-class interfaces for services and for tool-calling agents.</p>
-          </div>
-          <div class="feature">
-            <h4>Schema discipline</h4>
-            <p>Normalize divergent vendor tables into a stable JSON surface for your applications.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="enterprise">
-      <div class="wrap">
-        <div class="enterprise">
-          <div>
-            <p class="eyebrow">Enterprise</p>
-            <h2>Ready for production workflows.</h2>
-            <p class="section-desc">
-              Security, scale, and support for teams that cannot afford silent extraction errors.
-            </p>
-            <ul>
-              <li>Deployment options for air-gapped or VPC environments</li>
-              <li>SLAs and forward-deployed support for critical pipelines</li>
-              <li>Audit trails from source page to graph node</li>
-              <li>Integration support for PLM, EDA, and internal data lakes</li>
-            </ul>
-            <a href="#contact" class="btn btn-primary" style="margin-top: 1.25rem">Contact sales</a>
-          </div>
-          <div class="hero-visual" style="min-height: 220px" aria-hidden="true">
-            <div class="hero-nodes">SOC2 roadmap · HIPAA aware</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="wrap">
-        <div class="section-head">
+    <section class="section node-section" id="faq">
+      <div class="node-anchor" style="--nx:0.72">
+        <div class="node-ring graph-node-reveal">
           <p class="eyebrow">FAQ</p>
-          <h2>Questions, answered.</h2>
+          <h2>Questions,<br>answered.</h2>
         </div>
+      </div>
+      <div class="wrap node-content graph-node-reveal">
         <div class="faq-list">
           <div class="faq-item open">
             <button type="button" aria-expanded="true">
@@ -603,11 +588,13 @@
       </div>
     </section>
 
+    </div><!-- /sections-track -->
+
     <footer>
       <div class="wrap">
         <div class="footer-grid">
           <div class="footer-brand">
-            <a href="#" class="logo">Sylica<span>.dev</span></a>
+            <a href="#" class="logo">Sylica</a>
             <p>
               Sylica turns technical datasheets into structured, graph-linked parameters so AI and
               software can design with hardware-grade context—at lower token cost and higher trust.
@@ -616,8 +603,7 @@
           <div class="footer-col">
             <h4>Product</h4>
             <a href="#product">Overview</a>
-            <a href="#how">Pipeline</a>
-            <a href="#enterprise">Enterprise</a>
+            <a href="#live-demo">Live demo</a>
           </div>
           <div class="footer-col">
             <h4>Company</h4>
@@ -639,5 +625,7 @@
 
     <script src="js/main.js" defer></script>
     <script src="js/hero-datasheet-demo.js" defer></script>
+    <script src="js/background-canvas.js" defer></script>
+    <script src="js/scroll-graph.js" defer></script>
   </body>
 </html>

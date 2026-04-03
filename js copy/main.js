@@ -1,5 +1,5 @@
 /**
- * Sylica marketing site: mobile nav, use-case tabs, FAQ accordions, stat animation.
+ * Sylica marketing site: mobile nav, use-case tabs, FAQ accordions.
  */
 (function () {
   "use strict";
@@ -53,31 +53,4 @@ document.querySelectorAll(".faq-item button").forEach(function (btn) {
   });
 });
 
-var stat = document.getElementById("statNum");
-if (stat) {
-  var target = parseInt(stat.getAttribute("data-target"), 10) || 0;
-  var done = false;
-  var obs = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting || done) return;
-        done = true;
-        var start = 0;
-        var dur = 1400;
-        var t0 = null;
-        function tick(ts) {
-          if (!t0) t0 = ts;
-          var p = Math.min((ts - t0) / dur, 1);
-          var eased = 1 - Math.pow(1 - p, 3);
-          var val = Math.floor(eased * target);
-          stat.textContent = val.toLocaleString();
-          if (p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      });
-    },
-    { threshold: 0.4 }
-  );
-  obs.observe(stat);
-}
 })();
