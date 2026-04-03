@@ -1,0 +1,202 @@
+/* Hero interactive demo: datasheet layer ↔ graph layer */
+.hero-visual.hero-visual--demo {
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: crosshair;
+}
+
+.hero-visual.hero-visual--demo::after {
+  display: none;
+}
+
+.ds-demo {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.625rem;
+  color: var(--grey-light);
+}
+
+.ds-demo__hint {
+  flex-shrink: 0;
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(17, 17, 17, 0.92);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grey);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ds-demo__hint span:last-child {
+  color: var(--beige);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.ds-demo__stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0.65rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--black-soft);
+  overflow: hidden;
+  touch-action: none;
+}
+
+.ds-demo__sheet,
+.ds-demo__graph-layer {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.05s linear;
+}
+
+.ds-demo__sheet {
+  padding: 0.65rem 0.75rem;
+  overflow: hidden;
+  font-family: "Inter", ui-monospace, monospace;
+  line-height: 1.35;
+  pointer-events: none;
+}
+
+.ds-demo__sheet-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.5rem;
+}
+
+.ds-demo__sheet-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+.ds-demo__sheet-meta {
+  margin-top: 0.2rem;
+  color: var(--grey);
+  font-size: 0.6rem;
+}
+
+.ds-demo__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.58rem;
+}
+
+.ds-demo__table th,
+.ds-demo__table td {
+  text-align: left;
+  padding: 0.22rem 0.28rem;
+  border-bottom: 1px solid rgba(42, 42, 42, 0.85);
+}
+
+.ds-demo__table th {
+  color: var(--beige);
+  font-weight: 600;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ds-demo__table td:first-child {
+  color: var(--grey-light);
+  font-weight: 600;
+}
+
+.ds-demo__pin {
+  margin-top: 0.55rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed var(--border);
+  font-size: 0.56rem;
+  color: var(--grey);
+}
+
+.ds-demo__graph-layer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse 85% 75% at 50% 45%, rgba(212, 196, 176, 0.07), transparent 55%),
+    var(--black-soft);
+  pointer-events: none;
+}
+
+.ds-demo__graph-layer svg {
+  width: 100%;
+  height: 100%;
+  max-width: 320px;
+  max-height: 100%;
+}
+
+.ds-demo__graph-layer .g-node {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ds-demo__graph-layer .g-edge {
+  fill: none;
+  stroke: rgba(212, 196, 176, 0.35);
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-dasharray: 4 3;
+  animation: ds-dash 14s linear infinite;
+}
+
+.ds-demo__graph-layer.is-rich .g-edge {
+  stroke: rgba(212, 196, 176, 0.55);
+  stroke-dasharray: none;
+  animation: none;
+}
+
+@keyframes ds-dash {
+  to {
+    stroke-dashoffset: -80;
+  }
+}
+
+.ds-demo__cursor {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  margin: -70px 0 0 -70px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(212, 196, 176, 0.14) 0%, transparent 68%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  mix-blend-mode: screen;
+  z-index: 3;
+}
+
+.ds-demo__stage.is-active .ds-demo__cursor {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .ds-demo__graph-layer svg {
+    max-width: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-demo__graph-layer .g-edge {
+    animation: none;
+    stroke-dasharray: none;
+  }
+
+  .hero-visual.hero-visual--demo {
+    cursor: default;
+  }
+
+  .ds-demo__stage {
+    touch-action: manipulation;
+  }
+}

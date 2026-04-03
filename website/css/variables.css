@@ -1,0 +1,18 @@
+/* Design tokens: colors, radii, layout constants */
+:root {
+  --black: #0a0a0a;
+  --black-soft: #111111;
+  --elevated: #161616;
+  --border: #2a2a2a;
+  --grey: #737373;
+  --grey-light: #a3a3a3;
+  --white: #fafafa;
+  --beige: #d4c4b0;
+  --beige-deep: #b5a48e;
+  --beige-wash: #e8dfd2;
+  --beige-dim: rgba(212, 196, 176, 0.12);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --max: 1120px;
+  --nav-h: 64px;
+}
