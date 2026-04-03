@@ -3,6 +3,7 @@
   user-select: none;
   -webkit-user-select: none;
   cursor: ew-resize;
+  aspect-ratio: 16 / 9;
 }
 
 .hero-visual.hero-visual--demo::after {
@@ -60,10 +61,10 @@
 }
 
 .ds-demo__sheet {
-  padding: 0.65rem 0.75rem;
+  padding: 0.9rem 1rem;
   overflow: hidden;
   font-family: "Inter", ui-monospace, monospace;
-  line-height: 1.35;
+  line-height: 1.4;
   pointer-events: none;
   z-index: 1;
 }
@@ -91,7 +92,7 @@
 .ds-demo__table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.58rem;
+  font-size: 0.75rem;
 }
 
 .ds-demo__table th,
@@ -163,20 +164,20 @@
 
 .ds-demo__graph-layer .g-node__meta {
   font-family: "Inter", system-ui, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  fill: rgba(250, 250, 250, 0.85);
+  fill: rgba(250, 250, 250, 0.95);
 }
 
 .ds-demo__graph-layer .g-edge__label {
   font-family: "Inter", system-ui, sans-serif;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  fill: rgba(212, 196, 176, 0.92);
+  fill: var(--beige-wash);
   paint-order: stroke;
   stroke: rgba(10, 10, 10, 0.78);
   stroke-width: 4px;
