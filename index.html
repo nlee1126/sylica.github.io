@@ -184,19 +184,12 @@
                     <line class="g-edge" marker-end="url(#dsArrow)" x1="520" y1="240" x2="640" y2="150" />
                     <line class="g-edge" marker-end="url(#dsArrow)" x1="640" y1="150" x2="430" y2="480" />
                     <line class="g-edge" marker-end="url(#dsArrow)" x1="220" y1="180" x2="260" y2="360" />
-                  </g>
 
-                  <g class="g-edge-labels">
-                    <text class="g-edge__label" x="580" y="195" text-anchor="middle">12</text>
-                    <text class="g-edge__label" x="370" y="210" text-anchor="middle">16</text>
-                    <text class="g-edge__label" x="620" y="285" text-anchor="middle">9</text>
-                    <text class="g-edge__label" x="430" y="325" text-anchor="middle">7</text>
-                    <text class="g-edge__label" x="610" y="150" text-anchor="middle">13</text>
-                    <text class="g-edge__label" x="530" y="280" text-anchor="middle">15</text>
-                    <text class="g-edge__label" x="475" y="360" text-anchor="middle">11</text>
-                    <text class="g-edge__label" x="390" y="300" text-anchor="middle">8</text>
-                    <text class="g-edge__label" x="475" y="420" text-anchor="middle">5</text>
-                    <text class="g-edge__label" x="715" y="245" text-anchor="middle">14</text>
+                    <!-- VIN min/max + VOUT min/max links (extra complexity, still datasheet-aligned) -->
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="640" y1="150" x2="580" y2="115" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="640" y1="150" x2="685" y2="95" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="910" y1="250" x2="830" y2="310" />
+                    <line class="g-edge" marker-end="url(#dsArrow)" x1="910" y1="250" x2="955" y2="340" />
                   </g>
 
                   <g class="g-nodes" filter="url(#heroDsGlow)">
@@ -204,38 +197,38 @@
                     <g class="g-node" transform="translate(220,180)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">6</text>
-                      <text class="g-node__meta" y="52" text-anchor="middle">θJA 48°C/W</text>
+                      <text class="g-node__meta" y="52" text-anchor="middle">THERMAL θJA 48°C/W</text>
                     </g>
                     <g class="g-node" transform="translate(520,240)">
                       <circle class="g-node__disc" r="36" />
                       <text class="g-node__label" y="11" text-anchor="middle">4</text>
-                      <text class="g-node__meta" y="55" text-anchor="middle">CORE</text>
+                      <text class="g-node__meta" y="55" text-anchor="middle">CORE GRAPH HUB</text>
                     </g>
                     <g class="g-node" transform="translate(640,150)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">5</text>
-                      <text class="g-node__meta" y="52" text-anchor="middle">VIN 2.7–5.5V</text>
+                      <text class="g-node__meta" y="52" text-anchor="middle">INPUT RAIL VIN 2.7–5.5V</text>
                     </g>
                     <g class="g-node" transform="translate(340,410)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">3</text>
-                      <text class="g-node__meta" y="52" text-anchor="middle">PKG 8L-DFN</text>
+                      <text class="g-node__meta" y="52" text-anchor="middle">PACKAGE 8L-DFN</text>
                     </g>
                     <g class="g-node" transform="translate(720,330)">
                       <circle class="g-node__disc" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">2</text>
-                      <text class="g-node__meta" y="52" text-anchor="middle">IOUT 0–800mA</text>
+                      <text class="g-node__meta" y="52" text-anchor="middle">LOAD IOUT 0–800mA</text>
                     </g>
                     <g class="g-node" transform="translate(910,250)">
                       <circle class="g-node__disc g-node__disc--accent" r="34" />
                       <text class="g-node__label" y="10" text-anchor="middle">1</text>
-                      <text class="g-node__meta" y="52" text-anchor="middle">VOUT ≥1.2V</text>
+                      <text class="g-node__meta" y="52" text-anchor="middle">OUTPUT TARGET VOUT ≥1.2V</text>
                     </g>
 
                     <g class="g-node" transform="translate(700,60)">
                       <circle class="g-node__disc" r="30" />
                       <text class="g-node__label" y="9" text-anchor="middle">7</text>
-                      <text class="g-node__meta" y="46" text-anchor="middle">PSRR 70dB</text>
+                      <text class="g-node__meta" y="46" text-anchor="middle">PSRR 70dB @1kHz</text>
                     </g>
                     <g class="g-node" transform="translate(540,320)">
                       <circle class="g-node__disc" r="30" />
@@ -245,17 +238,39 @@
                     <g class="g-node" transform="translate(430,480)">
                       <circle class="g-node__disc" r="30" />
                       <text class="g-node__label" y="9" text-anchor="middle">9</text>
-                      <text class="g-node__meta" y="46" text-anchor="middle">LINE 0.02–0.08%/V</text>
+                      <text class="g-node__meta" y="46" text-anchor="middle">LINE REG 0.02–0.08%/V</text>
                     </g>
                     <g class="g-node" transform="translate(260,360)">
                       <circle class="g-node__disc" r="30" />
                       <text class="g-node__label" y="9" text-anchor="middle">10</text>
-                      <text class="g-node__meta" y="46" text-anchor="middle">TA −40..+125°C</text>
+                      <text class="g-node__meta" y="46" text-anchor="middle">TEMPERATURE TA −40..+125°C</text>
                     </g>
                     <g class="g-node" transform="translate(610,430)">
                       <circle class="g-node__disc g-node__disc--accent" r="30" />
                       <text class="g-node__label" y="9" text-anchor="middle">11</text>
-                      <text class="g-node__meta" y="46" text-anchor="middle">EP → GND</text>
+                      <text class="g-node__meta" y="46" text-anchor="middle">STABILITY EP → GND</text>
+                    </g>
+
+                    <!-- Extra labeled nodes derived from datasheet min/max -->
+                    <g class="g-node" transform="translate(580,115)">
+                      <circle class="g-node__disc" r="28" />
+                      <text class="g-node__label" y="9" text-anchor="middle">12</text>
+                      <text class="g-node__meta" y="44" text-anchor="middle">VIN MIN 2.7V</text>
+                    </g>
+                    <g class="g-node" transform="translate(685,95)">
+                      <circle class="g-node__disc" r="28" />
+                      <text class="g-node__label" y="9" text-anchor="middle">13</text>
+                      <text class="g-node__meta" y="44" text-anchor="middle">VIN MAX 5.5V</text>
+                    </g>
+                    <g class="g-node" transform="translate(830,310)">
+                      <circle class="g-node__disc" r="28" />
+                      <text class="g-node__label" y="9" text-anchor="middle">14</text>
+                      <text class="g-node__meta" y="44" text-anchor="middle">VOUT MIN 1.2V</text>
+                    </g>
+                    <g class="g-node" transform="translate(955,340)">
+                      <circle class="g-node__disc g-node__disc--accent" r="28" />
+                      <text class="g-node__label" y="9" text-anchor="middle">15</text>
+                      <text class="g-node__meta" y="44" text-anchor="middle">VOUT MAX VIN−0.2</text>
                     </g>
                   </g>
                 </svg>

@@ -128,8 +128,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(ellipse 85% 75% at 50% 45%, rgba(212, 196, 176, 0.08), transparent 55%),
-    var(--black-soft);
+  background: var(--black-soft);
   pointer-events: none;
   opacity: 1;
   clip-path: polygon(0 0, var(--ds-swipe) 0, var(--ds-swipe) 100%, 0 100%);
